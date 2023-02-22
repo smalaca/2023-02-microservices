@@ -16,8 +16,8 @@ public class OfferCommandFacade {
     }
 
     public void accept(AcceptOfferCommand acceptOfferCommand){
-
         Offer offer = offerRepository.findBy(acceptOfferCommand.getOfferId());
+
         Order order = offer.accept();
 
         orderRepository.save(order);

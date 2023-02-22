@@ -12,6 +12,12 @@ public class Order {
     private OrderNumber orderNumber;
     private List<ProductVO> productVOS;
 
+    Order(OrderNumber orderNumber, OrderState orderState, List<ProductVO> productVOS) {
+        this.orderNumber = orderNumber;
+        this.state = orderState;
+        this.productVOS = productVOS;
+    }
+
     public void place(PaymentMethod paymentMethodVO) {
         state = OrderState.PLACED;
     }
