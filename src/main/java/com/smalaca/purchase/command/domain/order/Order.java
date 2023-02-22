@@ -1,7 +1,10 @@
 package com.smalaca.purchase.command.domain.order;
 
+// Aggregate root
 public class Order {
-    public void buyProducts(PaymentMethod paymentMethodVO) {
+    private OrderState state;
 
+    public void place(PaymentMethod paymentMethodVO) {
+        state = OrderState.PLACED;
     }
 }

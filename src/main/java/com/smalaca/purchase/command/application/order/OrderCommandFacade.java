@@ -21,7 +21,7 @@ public class OrderCommandFacade {
         PaymentMethod paymentMethodVO = PaymentMethod.from(paymentMethod);
 
         // jedna linijka kodu wywołująca domęnę
-        order.buyProducts(paymentMethodVO);
+        order.place(paymentMethodVO);
 
         // zapis agregatów [1..*]
         orderRepository.save(order);
