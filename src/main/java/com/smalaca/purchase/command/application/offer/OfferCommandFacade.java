@@ -1,8 +1,8 @@
 package com.smalaca.purchase.command.application.offer;
 
-import com.smalaca.purchase.command.domain.offer.Offer;
+import com.smalaca.purchase.command.domain.offer.OfferAggregateRoot;
 import com.smalaca.purchase.command.domain.offer.OfferRepository;
-import com.smalaca.purchase.command.domain.order.Order;
+import com.smalaca.purchase.command.domain.order.OrderAggregateRoot;
 import com.smalaca.purchase.command.domain.order.OrderRepository;
 
 public class OfferCommandFacade {
@@ -16,9 +16,9 @@ public class OfferCommandFacade {
     }
 
     public void accept(AcceptOfferCommand acceptOfferCommand){
-        Offer offer = offerRepository.findBy(acceptOfferCommand.getOfferId());
+        OfferAggregateRoot offer = offerRepository.findBy(acceptOfferCommand.getOfferId());
 
-        Order order = offer.accept();
+        OrderAggregateRoot order = offer.accept();
 
         orderRepository.save(order);
     }

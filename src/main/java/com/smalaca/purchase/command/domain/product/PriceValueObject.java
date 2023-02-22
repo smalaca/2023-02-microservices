@@ -1,5 +1,5 @@
 package com.smalaca.purchase.command.domain.product;
 
-class Price {
+class PriceValueObject {
 
 }

@@ -1,6 +1,6 @@
 package com.smalaca.purchase.command.domain.order;
 
-enum OrderState {
+enum OrderStateValueObject {
     PLACED,
     CREATED
 }
