@@ -14,15 +14,15 @@ public class OrderFactory {
         this.discountService = discountService;
     }
 
-    public OrderAggregateRoot create(List<ProductValueObject> productVOS, ParameterObject parameterObject) {
+    public OrderAggregateRoot create(List<ProductValueObject> products, AcceptOfferDomainCommand acceptOfferDomainCommand) {
         return OrderAggregateRoot.Builder.order()
-                .with(productVOS)
+                .with(products)
                 .with(OrderNumberValueObject.generate())
                 .with(OrderStateValueObject.CREATED)
-                .with(parameterObject.getAddress())
-                .with(parameterObject.getDeliveryMethod())
-                .withDiscountCode(parameterObject.getDiscountCode())
-                .with(getFinalPriceFor(productVOS, parameterObject.getDiscountCode()))
+                .with(acceptOfferDomainCommand.getAddress())
+                .with(acceptOfferDomainCommand.getDeliveryMethod())
+                .withDiscountCode(acceptOfferDomainCommand.getDiscountCode())
+                .with(getFinalPriceFor(products, acceptOfferDomainCommand.getDiscountCode()))
                 .build();
     }
 

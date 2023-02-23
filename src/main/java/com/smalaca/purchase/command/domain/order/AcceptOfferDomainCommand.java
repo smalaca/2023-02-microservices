@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class ParameterObject {
+public class AcceptOfferDomainCommand {
     private final AddressValueObject address;
     private final DeliveryMethodValueObject deliveryMethod;
     private final String discountCode;
