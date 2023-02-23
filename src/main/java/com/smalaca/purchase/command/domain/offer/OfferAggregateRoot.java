@@ -1,7 +1,5 @@
 package com.smalaca.purchase.command.domain.offer;
 
-import com.smalaca.purchase.command.domain.order.AddressValueObject;
-import com.smalaca.purchase.command.domain.order.DeliveryMethodValueObject;
 import com.smalaca.purchase.command.domain.order.OrderAggregateRoot;
 import com.smalaca.purchase.command.domain.order.OrderBuilder;
 import com.smalaca.purchase.command.domain.price.PriceValueObject;
@@ -12,13 +10,13 @@ import java.util.List;
 public class OfferAggregateRoot {
     private List<ProductValueObject> productVOS;
 
-    public OrderAggregateRoot accept(AddressValueObject address, DeliveryMethodValueObject deliveryMethod, String discountCode) {
+    public OrderAggregateRoot accept(ParameterObject parameterObject) {
         PriceValueObject price = null;
         return OrderBuilder.order()
                 .with(productVOS)
-                .with(address)
-                .with(deliveryMethod)
-                .withDiscountCode(discountCode)
+                .with(parameterObject.getAddress())
+                .with(parameterObject.getDeliveryMethod())
+                .withDiscountCode(parameterObject.getDiscountCode())
                 .with(price)
                 .build();
     }
