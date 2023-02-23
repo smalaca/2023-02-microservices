@@ -23,12 +23,12 @@ public class OfferCommandFacade {
     }
 
     @Transactional
-    public void accept(AcceptOfferCommand acceptOfferCommand){
-        OfferAggregateRoot offer = offerRepository.findBy(acceptOfferCommand.getOfferId());
-        AddressValueObject address = addressValueObjectFactory.create(acceptOfferCommand.getStreet(), acceptOfferCommand.getCity());
-        DeliveryMethodValueObject deliveryMethod = DeliveryMethodValueObject.from(acceptOfferCommand.getDeliveryMethod());
+    public void accept(AcceptOfferCommand command){
+        OfferAggregateRoot offer = offerRepository.findBy(command.getOfferId());
+        AddressValueObject address = addressValueObjectFactory.create(command.getStreet(), command.getCity());
+        DeliveryMethodValueObject deliveryMethod = DeliveryMethodValueObject.from(command.getDeliveryMethod());
 
-        OrderAggregateRoot order = offer.accept();
+        OrderAggregateRoot order = offer.accept(address, deliveryMethod, command.getDiscountCode());
 
         orderRepository.save(order);
     }
