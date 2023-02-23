@@ -11,5 +11,4 @@ public class AcceptOfferCommand {
     private String deliveryMethod;
     private String city;
     private String street;
-
 }
