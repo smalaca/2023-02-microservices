@@ -11,7 +11,7 @@ public class OfferAggregateRoot {
     private List<ProductValueObject> productVOS;
 
     public OrderAggregateRoot accept(ParameterObject parameterObject) {
-        PriceValueObject price = null;
+        PriceValueObject price = parameterObject.getFinalPriceFor(productVOS);
         return OrderBuilder.order()
                 .with(productVOS)
                 .with(parameterObject.getAddress())
