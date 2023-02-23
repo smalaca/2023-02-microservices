@@ -1,4 +1,4 @@
-package com.smalaca.purchase.command.domain.offer;
+package com.smalaca.purchase.command.domain.order;
 
 import com.smalaca.purchase.command.domain.price.PriceValueObject;
 

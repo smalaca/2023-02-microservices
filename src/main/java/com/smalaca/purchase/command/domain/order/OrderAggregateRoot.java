@@ -9,27 +9,85 @@ import javax.persistence.Id;
 import java.util.List;
 import java.util.UUID;
 
-// Aggregate root
 @Entity
 public class OrderAggregateRoot {
     @Id
     @GeneratedValue
     private UUID id;
-    private OrderStateValueObject state;
-    private OrderNumberValueObject orderNumber;
-    private List<ProductValueObject> productVOS;
+    private List<ProductValueObject> products;
     private AddressValueObject address;
     private DeliveryMethodValueObject deliveryMethod;
     private String discountCode;
     private PriceValueObject price;
+    private OrderNumberValueObject orderNumber;
+    private OrderStateValueObject state;
 
-    OrderAggregateRoot(OrderNumberValueObject orderNumber, OrderStateValueObject orderState, List<ProductValueObject> productVOS) {
-        this.orderNumber = orderNumber;
-        this.state = orderState;
-        this.productVOS = productVOS;
+    private OrderAggregateRoot(Builder builder) {
+        products = builder.products;
+        address = builder.address;
+        deliveryMethod = builder.deliveryMethod;
+        discountCode = builder.discountCode;
+        price = builder.price;
+        orderNumber = builder.orderNumber;
+        state = builder.state;
     }
 
     public void place(PaymentMethodValueObject paymentMethodVO) {
         state = OrderStateValueObject.PLACED;
+    }
+
+    static class Builder {
+        private List<ProductValueObject> products;
+        private AddressValueObject address;
+        private DeliveryMethodValueObject deliveryMethod;
+        private String discountCode;
+        private PriceValueObject price;
+        private OrderNumberValueObject orderNumber;
+        private OrderStateValueObject state;
+
+        private Builder() {}
+
+        static Builder order() {
+            return new Builder();
+        }
+
+        Builder with(List<ProductValueObject> products) {
+            this.products = products;
+            return this;
+        }
+
+        Builder with(AddressValueObject address) {
+            this.address = address;
+            return this;
+        }
+
+        Builder with(DeliveryMethodValueObject deliveryMethod) {
+            this.deliveryMethod = deliveryMethod;
+            return this;
+        }
+
+        Builder withDiscountCode(String discountCode) {
+            this.discountCode = discountCode;
+            return this;
+        }
+
+        Builder with(PriceValueObject price) {
+            this.price = price;
+            return this;
+        }
+
+        Builder with(OrderNumberValueObject orderNumber) {
+            this.orderNumber = orderNumber;
+            return this;
+        }
+
+        Builder with(OrderStateValueObject state) {
+            this.state = state;
+            return this;
+        }
+
+        OrderAggregateRoot build() {
+            return new OrderAggregateRoot(this);
+        }
     }
 }
